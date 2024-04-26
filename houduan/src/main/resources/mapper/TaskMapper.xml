@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo20230927.TaskMapper">
+    <select id="findAllTasksByUserId" resultType="com.example.demo20230927.Task">
+        SELECT id AS taskId,
+               user_id as userId,
+               content as content,
+               created_at as createdAt,
+               is_completed as isCompleted,
+               completed_at as completedAt,
+               is_deleted as isDeleted
+               FROM task WHERE user_id = #{userId} AND is_deleted = FALSE
+    </select>
+
+    <insert id="insertTask" parameterType="com.example.demo20230927.Task">
+        INSERT INTO task (user_id, content, created_at, is_completed, completed_at)
+        VALUES (#{userId}, #{content}, #{createdAt}, #{isCompleted}, #{completedAt})
+    </insert>
+
+    <delete id="deleteTaskById">
+        DELETE FROM task WHERE id = #{taskId}
+    </delete>
+
+    <update id="softDeleteTask" parameterType="long">
+        UPDATE task
+        SET is_deleted = TRUE
+        WHERE id = #{taskId}
+    </update>
+
+    <update id="updateTask" parameterType="com.example.demo20230927.Task">
+        UPDATE task
+        SET content = #{content}, is_completed = #{isCompleted}, completed_at = #{completedAt}
+        WHERE id = #{taskId}
+    </update>
+
+    <select id="findTaskById" resultType="com.example.demo20230927.Task">
+        SELECT * FROM task WHERE id = #{taskId}
+    </select>
+</mapper>
