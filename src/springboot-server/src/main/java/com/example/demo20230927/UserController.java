@@ -11,16 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
+@RequestMapping("/user")
 public class UserController {
-
     @Autowired
     private UserService userService;
-
-    @RequestMapping("/")
-    public String home() {
-        return "Hello World";
-    }
-    
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody User user) {
         int code = userService.register(user);
@@ -44,6 +38,4 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("用户名或密码错误");
         }
     }
-
-
 }

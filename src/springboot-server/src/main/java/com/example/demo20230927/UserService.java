@@ -2,7 +2,6 @@ package com.example.demo20230927;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Collections;
@@ -21,7 +20,7 @@ public class UserService {
         if(oldUser != null){
             return 2; //代码2代表该用户名已经存在
         } else if (user.getPassword().length() < 6 ||
-                user.getPassword().length() > 10 ||
+                user.getPassword().length() > 16 ||
                 user.getPassword().contains(" ")) {
             return 3; //代码3代表密码长度问题
         } else if (user.getUsername().length() == 0 ||

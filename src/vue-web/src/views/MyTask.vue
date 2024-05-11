@@ -132,6 +132,7 @@ export default {
       }
     },
     async toggleTaskStatus(task) {
+      console.log("获取的值",task.isCompleted);
       let mark = !task.isCompleted;
       console.log(mark);
       try {
